@@ -19,8 +19,17 @@ namespace JmCalculator.Shared.Models
         [EnumDataType(typeof(JmUnitTypes))]
         public JmUnitTypes UnitType { get; set; } = JmUnitTypes.JmComfort;
 
-        public static bool operator == (JmOption op1, JmOption op2) => op1.Name == op2.Name;
-        public static bool operator != (JmOption op1, JmOption op2) => op1.Name != op2.Name;
+        public static bool operator == (JmOption op1, JmOption op2) => op1.Equals(op2);
+        public static bool operator != (JmOption op1, JmOption op2) => !op1.Equals(op2);
+        public override bool Equals(object obj)
+        {
+            var option = obj as JmOption;
+            return option != null && option.Name == Name;
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
 
