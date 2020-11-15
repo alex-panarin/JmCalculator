@@ -68,7 +68,12 @@ namespace JmCalculator.Service.Processors
             if (options == null)
                 throw new NullReferenceException(nameof(options));
 
-            foreach (var option in options)
+            foreach (var option in options.Where ( op => 
+                   op == priceRequest.GuidingRailBracket
+                || op == priceRequest.HeadRailBraket
+                || op == priceRequest.OperationControl
+                || op == priceRequest.LeftGuidingRail
+                || op == priceRequest.RightGuidingRail ))
             {
                 var optionQuantity = 1;
 
