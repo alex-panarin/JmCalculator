@@ -23,7 +23,10 @@ namespace JmCalculator.Service.Repositories
 
         public async Task<JmPrice> GetAsync(JmPriceRequest request)
         {
-           var price = await _dataStorage.GetData(x => x.Height == request.Height && x.UnitType == request.UnitType);
+           var price = await _dataStorage.GetData(x => 
+               x.Height >= request.Height 
+            && x.Height < (request.Height + 100)  
+            && x.UnitType == request.UnitType);
 
             return price;
         }
